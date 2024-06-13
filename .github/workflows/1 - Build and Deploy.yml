@@ -29,7 +29,7 @@ jobs:
         run: |
           for dir in $(find ./app -mindepth 1 -maxdepth 1 -type d); do
             function_name=$(basename $dir)
-            dotnet publish "$dir" -c Release -o "out/$function_name"
+            dotnet publish "$dir" -c Release -o "out/$function_name" -r linux-x64 --self-contained false
           done
 
       - name: Upload Lambda artifacts
