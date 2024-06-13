@@ -39,7 +39,7 @@ jobs:
           for dir in ./out/*; do
             function_name=$(basename $dir)           
             cd $dir
-            zip -r code.zip bin/
+            zip -r code.zip bin/* -x "bin/"
             rm -rf bin
           done
 
