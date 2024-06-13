@@ -1,3 +1,7 @@
+terraform {
+  backend "s3" {}
+}
+
 module "bedrock" {
   source = "github.com/eduardobrl/bedrock_with_function_calling_module"
   instructions     = "You are an healpful assistant that assist users of a clinic through text chat to book exams. You have access to tools tha allow consulting and scheduling exams."
