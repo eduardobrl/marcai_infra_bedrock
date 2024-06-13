@@ -18,8 +18,4 @@ public class Function
         return new BedrockResponse();
     }
 
-    private async Task ProcessMessageAsync(SQSEvent.SQSMessage message, ILambdaContext context)
-    {
-        await Task.CompletedTask;
-    }
 }
