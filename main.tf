@@ -13,7 +13,7 @@ module "bedrock" {
         handler = "index.handler"
         schema = "out/exams_lambda/schema.yml"
         filename = "out/exams_lambda/code.zip"
-        runtime = "dotnet6"
+        runtime = "dotnet8"
     }
   ]
 }
