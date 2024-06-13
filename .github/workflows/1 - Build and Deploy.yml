@@ -40,7 +40,7 @@ jobs:
             function_name=$(basename $dir)           
             cd $dir
             zip -r code.zip bin/
-            rm -f bin
+            rm -rf bin
           done
 
       - name: Upload Lambda artifacts
