@@ -67,7 +67,6 @@ jobs:
           aws-region: us-east-1  # Change this to your desired region
 
       - name: Initialize Terraform with S3 backend
-        working-directory: ./terraform
         run: |
           terraform init -backend-config="bucket=${{ secrets.TF_S3_BUCKET }}" \
                          -backend-config="key=${{ secrets.TF_S3_KEY }}" \
@@ -76,5 +75,4 @@ jobs:
                          -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
       - name: Apply Terraform configuration
-        working-directory: ./terraform
         run: terraform apply -auto-approve
