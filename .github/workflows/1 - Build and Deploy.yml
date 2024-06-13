@@ -29,8 +29,18 @@ jobs:
         run: |
           for dir in $(find ./app -mindepth 1 -maxdepth 1 -type d); do
             function_name=$(basename $dir)
-            dotnet publish "$dir" -c Release -o "out/$function_name" -r linux-x64 --self-contained false
+            dotnet publish "$dir" -c Release -o "out/$function_name/bin" -r linux-x64 --self-contained false
             cp "$dir/schema.yml" "out/$function_name/schema.yml"
+          done
+
+      - name: Create code.zip
+        run: |
+          mkdir -p zip
+          for dir in ./out/*; do
+            function_name=$(basename $dir)           
+            cd $dir
+            zip -r code.zip bin/
+            rm -f bin
           done
 
       - name: Upload Lambda artifacts
