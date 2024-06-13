@@ -30,6 +30,7 @@ jobs:
           for dir in $(find ./app -mindepth 1 -maxdepth 1 -type d); do
             function_name=$(basename $dir)
             dotnet publish "$dir" -c Release -o "out/$function_name" -r linux-x64 --self-contained false
+            cp "$dir/schema.yml" "out/$function_name/schema.yml"
           done
 
       - name: Upload Lambda artifacts
