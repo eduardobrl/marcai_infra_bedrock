@@ -1,0 +1,118 @@
+openapi: 3.0.0
+info:
+  title: Exams Scheadule APU
+  version: 1.0.0
+  description: Gets and sets information about exams scheadule
+
+components:
+  schemas:
+    create_schedule:
+      type: object
+      properties:
+        doctor_id:
+          type: string
+        schedule_id:
+          type: string 
+
+  responses:
+    exam:
+      description: 'Exam information'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              
+              name:
+                type: string
+
+    scheadule:
+      description: 'Exam information'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              
+              name:
+                type: string
+
+              exam:
+                $ref: '#/components/responses/exam'
+                  
+paths:
+  /exams:
+    get:
+      summary: Gets all exams available exams for scheduling
+      description: Gets all exams available exams for scheduling
+      operationId: getExams
+
+      responses:
+        "200":
+          description: List of exams
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    
+                    name:
+                      type: string
+
+  /exams/{id}/scheadule:
+    get:
+      summary: Gets a specific exam scheadule
+      description: Gets a specific exam scheadule
+      operationId: getExam
+
+      parameters:
+        - name: start_date
+          in: query
+          description: Start date of query
+          required: false
+          schema:
+            type: string
+
+        - name: end_date
+          in: query
+          description: End date of query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Return single Exam
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+
+    post:
+      summary: Create a exam scheadule
+      description: Create a exam scheadule
+      operationId: postExam
+
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_schedule'
+
+      responses:
+        "201":
+          description: Exam created
